@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "entities": {
+    "Customer": {
+      "fields": {
+        "name":  { "type": "string", "required": true, "maxLength": 200 },
+        "email": { "type": "string", "required": true, "unique": true, "format": "email" },
+        "tier":  { "type": "enum", "values": ["free", "pro", "enterprise"], "default": "free" },
+        "notes": { "type": "text" }
+      },
+      "relations": {
+        "orders": { "kind": "one-to-many", "target": "Order", "inverse": "customer" }
+      },
+      "permissions": {
+        "read":   ["role:staff", "expr:record.ownerId == user.id"],
+        "create": ["role:staff"],
+        "update": ["role:staff"],
+        "delete": ["role:admin"]
+      },
+      "indexes": [
+        { "fields": ["email"], "unique": true }
+      ]
+    },
+    "Order": {
+      "fields": {
+        "total":  { "type": "decimal", "required": true, "min": 0 },
+        "status": { "type": "enum", "values": ["draft", "paid", "shipped", "cancelled"], "default": "draft" },
+        "paidAt": { "type": "datetime" }
+      },
+      "relations": {
+        "customer": { "kind": "many-to-one", "target": "Customer" }
+      },
+      "permissions": {
+        "read": ["role:staff"],
+        "*":    ["role:staff"]
+      }
+    }
+  },
+  "workflows": [
+    {
+      "name": "ship-on-paid",
+      "on": { "entity": "Order", "event": "update", "when": "record.status == 'paid' && prior.status != 'paid'" },
+      "actions": [
+        { "set":    { "field": "paidAt", "value": "now()" } },
+        { "create": { "entity": "Shipment", "with": { "orderId": "record.id" } } },
+        { "notify": { "channel": "warehouse", "template": "order_paid" } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,142 @@
+:root {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #1a1a1a;
+  background: #fafafa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.sf-app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.sf-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 0.75rem;
+}
+
+.sf-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.sf-version {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.sf-layout {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.sf-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sf-nav button {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.sf-nav button.active {
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.sf-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sf-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.sf-table th,
+.sf-table td {
+  border: 1px solid #e5e5e5;
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.sf-table th {
+  background: #f0f0f0;
+}
+
+.sf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 420px;
+}
+
+.sf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sf-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.sf-field input,
+.sf-field textarea,
+.sf-field select {
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.sf-field input[type="checkbox"] {
+  align-self: flex-start;
+}
+
+.sf-form button {
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #1a1a1a;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sf-error {
+  color: #b00020;
+}
+
+.sf-empty code {
+  display: inline-block;
+  margin: 0 0.25rem;
+  padding: 0.1rem 0.35rem;
+  background: #eee;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
